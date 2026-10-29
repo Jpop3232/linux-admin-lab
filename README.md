@@ -62,3 +62,6 @@ Like with single users, groups of users can have their SSH permissions configure
 |:--:|  
 | *newdenied being denied permission* |  
 ## Automated Backup System
+
+<img width="475" height="227" alt="image" src="https://github.com/user-attachments/assets/6caed8ef-412d-4375-b7a3-d8d53c7e0cd4" />
+
