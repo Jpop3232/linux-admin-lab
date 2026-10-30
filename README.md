@@ -2,6 +2,7 @@
 ## Project Purpose  
 This project is designed to practice user managment, SSH skills, and Bash scripting within a Linux enviroment. This project also involves writing a bash script for automated backups. 
 ## Project Setup
+### SSH Permissions
 For this project setup a VM with an Ubuntu server on it. I personally used Oracle VirtualBox. Populate the server with three other users, for the sake of clear labelling they will be lablled as "fullpermission", and "nopermission" which will indicate what level of file permission will be configured for them. All users have the password "1234", this is obviously an unacceptable password to have in real life but is done as to keep focus on the project. Now, create two groups of users, fill both with a number of users, I will label them as "allowed" and "denied". For this project to work openSSH needs to be installed on the VM. OpenSSH will also need to be installed, be sure to set the hostname as a reccognised key. 
 | <img width="431" height="253" alt="image" src="https://github.com/user-attachments/assets/634c96b2-08da-435c-8564-ff7581bcda47" />    |  
 |:--:|   
@@ -22,6 +23,12 @@ For this project setup a VM with an Ubuntu server on it. I personally used Oracl
 |<img width="876" height="317" alt="image" src="https://github.com/user-attachments/assets/ffd0dd30-b18d-4084-b2b9-607de65d42d8" />|  
 |:--:|  
 | *OpenSSH running on the Ubuntu VM* |     
+### Automated Backup log
+Setting up the Backup log requires creating a directory for both the script itself alongside creating a folder for where the backups will go:  
+|<img width="475" height="228" alt="Screenshot 2026-10-30 002513" src="https://github.com/user-attachments/assets/ecd777b4-c570-4064-a60b-d451db7ef068" />|  
+|:--:|  
+| *Configured directory, with a sample text file that will act as the subject of our backups* |   
+
 ## Configuring Permissions and SSH Access 
 ### Single Users
 Configuring permissions for users is as simple as going into the sshd_config file and adding the "AllowUsers" directive. With this directive being in the sshd_config file, nothing needs to be done users to restrict SSH access, "AllowUsers" acts as a white list and treats all users not on it as being blacklisted. Below is an example of what the modfied sshd_config file that allows fullpermission and blocks nopermission:  
@@ -62,6 +69,25 @@ Like with single users, groups of users can have their SSH permissions configure
 |:--:|  
 | *newdenied being denied permission* |  
 ## Automated Backup System
+### The Script
+Here is the script for my backup system, with backups set to delete in seven days: 
+|<img width="855" height="590" alt="grafik" src="https://github.com/user-attachments/assets/07868d73-e5d4-4250-a585-a83654e3ef8c" />|  
+|:--:|  
+| *Script for the backup system* |  
 
-<img width="475" height="227" alt="image" src="https://github.com/user-attachments/assets/6caed8ef-412d-4375-b7a3-d8d53c7e0cd4" />
+|<img width="870" height="162" alt="grafik" src="https://github.com/user-attachments/assets/caf6566f-dd5f-4fbe-b66a-7ccf32d8a911" />|  
+|:--:|  
+| *Script running* |  
 
+|<img width="467" height="342" alt="grafik" src="https://github.com/user-attachments/assets/5c08a667-8d16-4f85-b377-84d2b2e21cc0" />|  
+|:--:|  
+| *Directory with the backups* |    
+### Automation
+Using crontab I set up for a backup of the file to be created every 30 minutes. Which while may be excessive for real life applications for a backup, but for the sake of testing the automated script for a short period of time it will serve well. 
+|<img width="425" height="80" alt="grafik" src="https://github.com/user-attachments/assets/eb958488-7fa3-4b64-9ac5-fbf5f57c2f19" />|  
+|:--:|  
+| *Modified crontab file to run backup every 30 minutes* |  
+
+|<img width="476" height="330" alt="grafik" src="https://github.com/user-attachments/assets/3e98c42d-f9a5-465e-9fde-6c8ff92644e8" />|  
+|:--:|  
+| *Directory with the backup after automation was implemented, note the backup ending in 09_30_01 indicating it was made at 9:30* |  
